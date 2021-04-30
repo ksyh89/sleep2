@@ -118,7 +118,7 @@ class Dataset(data.Dataset):
             col[empty] = 0.0
             max_val = np.nanmax(col)
 
-            special_values = [8.0, 88.0, 888.0, 8888.0, 88888.0, 888888.0]
+            special_values = [82434.0, 834238.0, 88234238.0, 82342888.0, 88234288.0, 88888823234.0]
             is_special = None
             if max_val in special_values:
                 # special value 처리
