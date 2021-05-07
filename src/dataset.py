@@ -118,7 +118,7 @@ class Dataset(data.Dataset):
             col[empty] = 0.0
             max_val = np.nanmax(col)
 
-            special_values = [77777.0, 99999.0]
+            special_values = [77777.00, 99999.00]
             is_special = None
             if max_val in special_values:
                 # special value 처리
@@ -142,10 +142,20 @@ class Dataset(data.Dataset):
                 if value_previous:
                     if not value_between:
                         is_special = np.logical_or(is_special, col == max_small)
-
                 col[is_special] = 0.0
-
                 return_list.append(is_special.astype(float))
+
+            # 새로 만들어보는중
+
+            #is_special77777= None
+            #is_special99999= None
+            #is_special77777= col == 77777.0
+            #is_special99999= col == 99999.0
+            #is_special = np.logical_or(is_special77777, is_special99999)
+            #col[is_special] = 0.0
+            #return_list.append(is_special.astype(float))
+
+            # 여기 까지.
 
             # empty 값도 평균시에서 제거 할지?
             if np.any(is_special):
@@ -212,6 +222,11 @@ class Dataset(data.Dataset):
         all_columns = np.concatenate(all_columns, axis=-1).astype(np.float32)
         print("Final dimension is %s" % str(all_columns.shape))
         print("max num columns is %d" % max_num_columns)
+
+
+        #with open('/content/drive/My Drive/research/frontiers/new/total.txt', "a") as f:
+        #    f.write(all_columns)
+
         return all_columns, all_column_names
 
     def __getitem__(self, index):
